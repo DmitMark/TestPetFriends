@@ -4,7 +4,7 @@ from requests_toolbelt.multipart.encoder import MultipartEncoder
 
 class PetFriends:
     def __init__(self):
-        self.base_url = "petfriends.skillfactory.ru/"
+        self.base_url = "https://petfriends.skillfactory.ru/"
 
     def get_api_key(self, email, password):
 
