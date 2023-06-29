@@ -17,8 +17,9 @@ def test_get_all_pets_with_valid_key(filter=''):
     assert status == 200
     assert len(result['pets']) > 0
 
-def test_add_new_pet_with_valid_data(name='Bob', animal_type='dog',
+def test_add_new_pet_with_valid_data(name='Барбоскин', animal_type='двортерьер',
                                      age='4', pet_photo='images/dog1.jpg'):
+
     pet_photo = os.path.join(os.path.dirname(__file__), pet_photo)
 
     _, auth_key = pf.get_api_key(valid_email, valid_password)
