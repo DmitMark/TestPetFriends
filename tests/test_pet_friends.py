@@ -56,6 +56,33 @@ def test_successful_update_self_pet_info(name='Tom', animal_type='cat', age=5):
     else:
         raise Exception("There is no my pets")
 
+def test_successful_create_pet_simle(name='Tom', animal_type='cat', age=5):
+
+    _, auth_key = pf.get_api_key(valid_email, valid_password)
+
+    status, result = pf.create_pet_simple(auth_key, name, animal_type, age)
+
+    assert status == 200
+    assert result['name'] == name
+
+def test_successful_add_pet_photo(pet_photo='images/dog2.jpg'):
+
+    pet_photo = os.path.join(os.path.dirname(__file__), pet_photo)
+
+    _, auth_key = pf.get_api_key(valid_email, valid_password)
+    _, my_pets = pf.get_list_of_pets(auth_key, "my_pets")
+
+    if len(my_pets['pets']) > 0:
+        status, result = pf.add_photo_pet(auth_key, my_pets['pets'][0]['id'], pet_photo)
+
+        assert status == 200
+
+
+    else:
+        raise Exception("There is no my pets")
+
+
+
 
 
 
