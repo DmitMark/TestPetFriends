@@ -111,5 +111,7 @@ class PetFriends:
         headers = {'auth_key': auth_key['key'], 'Content-type': data.content_type}
 
         res = requests.post(self.base_url + 'api/pets/set_photo/' + pet_id, headers=headers, data=data)
+        status = res.status_code
+        return status
 
 
