@@ -19,7 +19,7 @@ def test_get_api_key_for_invalid_user(email = invalid_email, password = invalid_
     status, result = pf.get_api_key(email, password)
 
     assert status == 403
-    assert 'key' not in result
+    assert 'This user wasn&#x27;t found in database' in result
 
 
 def test_get_api_key_for_valid_user_invalid_password(email=valid_email, password=invalid_password):
@@ -29,7 +29,7 @@ def test_get_api_key_for_valid_user_invalid_password(email=valid_email, password
     status, result = pf.get_api_key(email, password)
 
     assert status == 403
-    assert 'key' not in result
+    assert 'This user wasn&#x27;t found in database' in result
 
 
 def test_get_all_pets_with_valid_key(filter=''):
@@ -52,6 +52,7 @@ def test_get_all_pets_with_invalid_key(filter=''):
     status, result = pf.get_list_of_pets(auth_key, filter)
 
     assert status == 403
+    assert 'Please provide &#x27;auth_key' in result
 
 
 def test_get_my_pets_with_valid_key(filter='my_pets'):
@@ -107,6 +108,8 @@ def test_add_new_pet_with_invalid_key(name='Jack', animal_type='dog',
     status, result = pf.add_new_pet(auth_key, name, animal_type, age, pet_photo)
 
     assert status == 403
+    assert 'Please provide &#x27;auth_key' in result
+
 
 def test_add_new_pet_with_invalid_data_age(name='Bobik', animal_type='двортерьер',
                                      age='four', pet_photo='images/dog1.jpg'):
@@ -120,6 +123,7 @@ def test_add_new_pet_with_invalid_data_age(name='Bobik', animal_type='дворт
     status, result = pf.add_new_pet(auth_key, name, animal_type, age, pet_photo)
 
     assert status == 400
+    assert result['age'] != age
 
 
 def test_successful_delete_self_pet():
