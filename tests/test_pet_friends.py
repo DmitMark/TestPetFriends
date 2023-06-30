@@ -6,7 +6,6 @@ pf = PetFriends()
 def test_get_api_key_for_valid_user(email = valid_email, password = valid_password):
     status, result = pf.get_api_key(email, password)
 
-    print(result)
     assert status == 200
     assert 'key' in result
 
@@ -73,9 +72,7 @@ def test_add_new_pet_with_invalid_data_photo(name='Jack', animal_type='dog',
     status, result = pf.add_new_pet(auth_key, name, animal_type, age, pet_photo)
 
     assert status == 400
-    # assert result['name'] == name
-    # assert result['animal_type'] == animal_type
-    # assert result['age'] == age
+
 
 def test_add_new_pet_with_invalid_key(name='Jack', animal_type='dog',
                                      age='4', pet_photo='images/dog1.jpg'):
